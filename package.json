@@ -8,6 +8,7 @@
     "prebuild": "rimraf ./production",
     "build": "NODE_ENV=production babel-node system/build.js && yarn cpx",
     "cpx": "cpx \"src/**/**/*.{gif,png,jpg,ico,svg,mp3,mp4,webm,eot,ttf,otf,woff,woff2,xml,json,txt,webmanifest,htaccess}\" production",
+    "browser": "browser-sync start -s 'production'",
     "lint:pug": "pug-lint --reporter node_modules/puglint-stylish .",
     "lint:style": "stylelint --fix --ignore-path .gitignore \"**/*.scss\"",
     "lint:script": "eslint --fix --ext .ts --ignore-path .eslintignore .",
@@ -19,18 +20,9 @@
     }
   },
   "lint-staged": {
-    "*.pug": [
-      "yarn lint:pug",
-      "git add --force"
-    ],
-    "*.ts": [
-      "yarn lint:script",
-      "git add --force"
-    ],
-    "*.scss": [
-      "yarn lint:style",
-      "git add --force"
-    ]
+    "*.pug": ["yarn lint:pug", "git add --force"],
+    "*.ts": ["yarn lint:script", "git add --force"],
+    "*.scss": ["yarn lint:style", "git add --force"]
   },
   "repository": {
     "type": "git",
@@ -50,6 +42,10 @@
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/register": "^7.7.4",
     "@babel/runtime": "^7.7.4",
+    "@hot-loader/react-dom": "^16.11.0",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-hot-loader": "^4.1.1",
     "@typescript-eslint/eslint-plugin": "^2.13.0",
     "@typescript-eslint/parser": "^2.13.0",
     "autoprefixer": "^9.7.3",
@@ -91,6 +87,9 @@
     "pug-lint": "^2.6.0",
     "puglint-stylish": "^1.1.0",
     "raw-loader": "^4.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-hot-loader": "^4.12.18",
     "stylelint": "^12.0.1",
     "stylelint-config-prettier": "^8.0.0",
     "stylelint-config-primer": "^9.0.0",

@@ -1,23 +1,43 @@
 import conf from './system/config'
 import glob from 'glob'
 
-const entries = []
+const { src, jsDir, jsxDir, isLocal } = conf()
 
-const { src, jsDir } = conf()
+const entriesTs = {}
+const entriesTsx = {}
 
 glob
   .sync(`./${src}/**/${jsDir}`, {
     ignore: `./${src}/**/_${jsDir}`
   })
-  .map(file => entries.push(file))
+  .map(file => {
+    const regEx = new RegExp(`./${src}/`)
+    const key = file.replace(regEx, '')
+    const jsKey = key.replace('ts', 'js')
+
+    entriesTs[jsKey] = file
+  })
+
+glob
+  .sync(`./${src}/**/${jsxDir}`, { ignore: `./${src}/**/_${jsxDir}` })
+  .map(file => {
+    const regEx = new RegExp(`./${src}/`)
+    const key = file.replace(regEx, '')
+    const jsKey = key.replace('tsx', 'js')
+    entriesTsx[jsKey] = isLocal
+      ? [file, 'webpack/hot/dev-server', 'webpack-hot-middleware/client']
+      : file
+  })
+
+const getEntry = Object.assign(entriesTs, entriesTsx) // マージ
 
 export default {
-  entry: entries,
+  entry: getEntry,
 
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         loader: 'ts-loader'
       },
@@ -28,23 +48,20 @@ export default {
       },
       {
         enforce: 'pre',
-        test: /\.ts$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
-          fix: true
+          fix: true,
+          formatter: require('eslint/lib/cli-engine/formatters/stylish')
         }
       }
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   }
-  // jsを複数を使う時に使う。
-  // optimization: {
-  //   splitChunks: {
-  //     name: 'sheard/scripts/vendor.js',
-  //     chunks: 'initial'
-  //   }
-  // },
 }

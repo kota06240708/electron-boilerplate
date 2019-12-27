@@ -16,6 +16,7 @@ const conf = () => {
   result.cssDir = '*.scss'
   result.htmlDir = '*.pug'
   result.jsDir = '*.ts'
+  result.jsxDir = '*.tsx'
 
   return result
 }

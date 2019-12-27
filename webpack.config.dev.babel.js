@@ -11,7 +11,7 @@ const { dist } = conf()
 export default merge(baseConfig, {
   output: {
     path: `${path.resolve('')}/${dist}`,
-    filename: './script/index.bundle.js',
+    filename: '[name]',
     publicPath: '/'
   },
   mode: 'development',
