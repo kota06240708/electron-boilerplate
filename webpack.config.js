@@ -65,9 +65,11 @@ const main = {
       }
     ]
   },
-  // プラグイン起動
   plugins: pluginsMain,
-  devtool: process.env.NODE_ENV === 'production' ? 'none' : 'inline-source-map'
+  devtool: process.env.NODE_ENV === 'production' ? 'none' : 'inline-source-map',
+  resolve: {
+    extensions: ['.ts', '.js']
+  }
 }
 
 // レンダラープロセス
@@ -104,7 +106,10 @@ const app = {
     ]
   },
   plugins: pluginsRenderer,
-  devtool: process.env.NODE_ENV === 'production' ? 'none' : 'inline-source-map'
+  devtool: process.env.NODE_ENV === 'production' ? 'none' : 'inline-source-map',
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
+  }
 }
 
 module.exports = [app, main]

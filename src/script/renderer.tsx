@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom';
 import React, { ReactElement } from 'react';
-import Unko from './_unko';
+import Example from './_example';
 
 const Layouts: () => ReactElement = (): ReactElement => {
-  return <Unko />;
+  return <Example />;
 };
 
 const rootEl: HTMLElement = document.getElementById('app');
