@@ -1,5 +1,4 @@
 declare var env: string
-declare module 'electron-connect'
 
 interface Document {
   createStyleSheet: any
