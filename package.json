@@ -4,7 +4,9 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
+    "electron": "electron .",
     "start": "webpack --watch",
+    "test": "electron-packager ./ front-end-boilerplate --overwrite --platform=darwin --arch=x64 --electron-version",
     "lint:script": "eslint --fix --ext .ts --ignore-path .eslintignore .",
     "lint-staged": "lint-staged"
   },
@@ -14,10 +16,7 @@
     }
   },
   "lint-staged": {
-    "*.ts": [
-      "yarn lint:script",
-      "git add --force"
-    ]
+    "*.ts": ["yarn lint:script", "git add --force"]
   },
   "repository": {
     "type": "git",
@@ -109,6 +108,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "electron-packager": "^14.1.1",
     "moment": "^2.24.0"
   }
 }
