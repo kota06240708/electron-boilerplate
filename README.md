@@ -1,14 +1,12 @@
-# front-end-boilerplate
+# electron-boilerplate
 
 ## Overview
 
-PUG + Sass + webpack v4 (TypeScript)
+webpack v4 (TypeScript + React)
 
-- [**Pug**](https://github.com/pugjs/pug)
-- [**Sass**](https://sass-lang.com/)
-- [**PostCSS**](https://github.com/postcss)
 - [**webpack**](https://github.com/webpack/webpack)
   - [TypeScript](https://github.com/microsoft/TypeScript)
+  - [React](https://github.com/facebook/react)
 
 ## Installing
 
@@ -35,7 +33,7 @@ $ yarn start
 ### 本番環境生成
 
 ```bash
-$ yarn build
+$ yarn prod
 ```
 
 ### 本番環境デバック
@@ -44,17 +42,17 @@ $ yarn build
 $ yarn browser
 ```
 
-開発をする際、`yarn start`をして頂き、[http://localhost:8080](http://localhost:8080) にブラウザにアクセスすればデバックできます。
+### アプリ化
 
-`yarn build`で production フォルダ内に納品ファイルが生成されます。
+```bash
+$ yarn package
+```
 
 ## Structure
 
 ```sh
 .
 ├── @type          # 全体共通の型
-├── dist           # 開発ファイルの書出先
-├── production     # 本番環境向
-├── src            # 実際に手を動かすファイル
-└── system         # ビルド環境
+├── dist           # 吐き出し先フォルダ
+├── src            # 実際に手を動かすフォルダ
 ```
