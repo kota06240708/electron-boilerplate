@@ -2,7 +2,7 @@
   "name": "front-end-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "build/main.js",
+  "main": "dist/main.js",
   "scripts": {
     "start": "webpack --watch",
     "lint:script": "eslint --fix --ext .ts --ignore-path .eslintignore .",
@@ -14,7 +14,10 @@
     }
   },
   "lint-staged": {
-    "*.ts": ["yarn lint:script", "git add --force"]
+    "*.ts": [
+      "yarn lint:script",
+      "git add --force"
+    ]
   },
   "repository": {
     "type": "git",
@@ -88,6 +91,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.12.18",
+    "screen": "^0.2.10",
     "spawn-sync": "^2.0.0",
     "stylelint": "^12.0.1",
     "stylelint-config-prettier": "^8.0.0",

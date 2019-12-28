@@ -1,7 +1,5 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
-// プラグインのインポート
 const createElectronReloadWebpackPlugin = require('electron-reload-webpack-plugin')
 
 // プロジェクト直下のディレクトリを監視させる
@@ -10,13 +8,15 @@ const ElectronReloadWebpackPlugin = createElectronReloadWebpackPlugin({
 })
 
 // メインプロセス
-/** 補完が効きます！ */
-/** @type import('webpack').Configuration */
 const main = {
   target: 'electron-main',
   mode: 'development',
   resolve: {
     extensions: ['.js', '.ts']
+  },
+  node: {
+    __dirname: false,
+    __filename: false
   },
   entry: './src/script/main.ts',
   output: {
@@ -36,8 +36,7 @@ const main = {
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
-          fix: true,
-          formatter: require('eslint/lib/cli-engine/formatters/stylish')
+          fix: true
         }
       }
     ]
@@ -53,7 +52,6 @@ const main = {
 }
 
 // レンダラープロセス
-/** @type import('webpack').Configuration */
 const app = {
   target: 'electron-renderer',
   mode: 'development',
@@ -78,8 +76,7 @@ const app = {
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
-          fix: true,
-          formatter: require('eslint/lib/cli-engine/formatters/stylish')
+          fix: true
         }
       }
     ]

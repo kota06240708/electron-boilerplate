@@ -10286,6 +10286,13 @@ schema-utils@^2.5.0, schema-utils@^2.6.1:
     ajv "^6.10.2"
     ajv-keywords "^3.4.1"
 
+screen@^0.2.10:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/screen/-/screen-0.2.10.tgz#c47eab3d48a7bd097caa6a0f4e66d2d6cd5a461e"
+  integrity sha1-xH6rPUinvQl8qmoPTmbS1s1aRh4=
+  dependencies:
+    xtend "~1.0.3"
+
 scss-tokenizer@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/scss-tokenizer/-/scss-tokenizer-0.2.3.tgz#8eb06db9a9723333824d3f5530641149847ce5d1"
@@ -12443,6 +12450,11 @@ xtend@^2.1.2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-2.2.0.tgz#eef6b1f198c1c8deafad8b1765a04dad4a01c5a9"
   integrity sha1-7vax8ZjByN6vrYsXZaBNrUoBxak=
+
+xtend@~1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/xtend/-/xtend-1.0.3.tgz#3f5d937353cced8e085399a563fdb22541c2960a"
+  integrity sha1-P12Tc1PM7Y4IU5mlY/2yJUHClgo=
 
 y18n@^3.2.1:
   version "3.2.1"
