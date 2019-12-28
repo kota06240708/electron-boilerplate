@@ -106,5 +106,4 @@ production-htdocs
 *.map
 
 dist/
-development/
-production/
+app-darwin-x64/

@@ -4,9 +4,12 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "electron": "electron .",
-    "start": "webpack --watch",
-    "test": "electron-packager ./ front-end-boilerplate --overwrite --platform=darwin --arch=x64 --electron-version",
+    "prestart": "rimraf ./dist",
+    "start": "NODE_ENV=local webpack --watch",
+    "preprod": "rimraf ./dist",
+    "prod": "NODE_ENV=production webpack",
+    "browser": "electron .",
+    "package": "electron-packager ./ app --overwrite --platform=darwin --arch=x64 --electron-version",
     "lint:script": "eslint --fix --ext .ts --ignore-path .eslintignore .",
     "lint-staged": "lint-staged"
   },

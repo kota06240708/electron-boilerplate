@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const createElectronReloadWebpackPlugin = require('electron-reload-webpack-plugin')
 
@@ -7,10 +8,33 @@ const ElectronReloadWebpackPlugin = createElectronReloadWebpackPlugin({
   path: './'
 })
 
+const pluginsMain = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  })
+]
+
+const pluginsRenderer = [
+  new HtmlWebpackPlugin({
+    template: './src/index.html'
+  }),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  })
+]
+
+if (process.env.NODE_ENV !== 'production') {
+  pluginsMain.push(ElectronReloadWebpackPlugin())
+  pluginsRenderer.push(ElectronReloadWebpackPlugin())
+}
+
 // メインプロセス
 const main = {
   target: 'electron-main',
-  mode: 'development',
+  mode:
+    process.env.NODE_ENV === 'production'
+      ? process.env.NODE_ENV
+      : 'development',
   resolve: {
     extensions: ['.js', '.ts']
   },
@@ -32,7 +56,7 @@ const main = {
       },
       {
         enforce: 'pre',
-        test: /\.(ts|tsx)$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
@@ -42,19 +66,17 @@ const main = {
     ]
   },
   // プラグイン起動
-  plugins: [
-    ElectronReloadWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/index.html'
-    })
-  ],
-  devtool: 'inline-source-map'
+  plugins: pluginsMain,
+  devtool: process.env.NODE_ENV === 'production' ? 'none' : 'inline-source-map'
 }
 
 // レンダラープロセス
 const app = {
   target: 'electron-renderer',
-  mode: 'development',
+  mode:
+    process.env.NODE_ENV === 'production'
+      ? process.env.NODE_ENV
+      : 'development',
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx']
   },
@@ -72,7 +94,7 @@ const app = {
       },
       {
         enforce: 'pre',
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
@@ -81,8 +103,8 @@ const app = {
       }
     ]
   },
-  plugins: [ElectronReloadWebpackPlugin()],
-  devtool: 'inline-source-map'
+  plugins: pluginsRenderer,
+  devtool: process.env.NODE_ENV === 'production' ? 'none' : 'inline-source-map'
 }
 
-module.exports = [main, app]
+module.exports = [app, main]

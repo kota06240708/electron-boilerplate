@@ -62,7 +62,9 @@ class Main {
     this.win.webContents.openDevTools()
 
     // 'ready' イベント内で BrowserWindow オブジェクトを渡す
-    client.create(this.win)
+    if (process.env.NODE_ENV !== 'production') {
+      client.create(this.win)
+    }
   }
 }
 
